@@ -23,6 +23,7 @@
             v-model="form.password"
             :suffix-icon="showclass"
             @focus="showpassword"
+            @keyup.native.13="login"
           ></el-input>
         </el-form-item>
 
@@ -41,8 +42,8 @@ export default {
   data () {
     return {
       form: {
-        username: '',
-        password: ''
+        username: 'admin',
+        password: '123456'
       },
       rules: {
         username: [
@@ -64,10 +65,10 @@ export default {
         let { data: result } = await this.$axios
           .post('/login', this.form)
           .catch(err => {
-            return alert(err)
+            return this.$message.error(err.message)
           })
         // 失败
-        if (result.meta.status !== 200 && result.meta.msg !== '登录成功') {
+        if (result.meta.status !== 200 || result.meta.msg !== '登录成功') {
           return this.$message.error(result.meta.msg)
         }
         // 成功,把token存入sessionstorage中

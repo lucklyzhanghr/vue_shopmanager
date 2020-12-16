@@ -6,3 +6,27 @@ body,
   margin: 0;
   padding: 0;
 }
+
+#scrollbar .el-scrollbar .el-scrollbar__wrap {
+  overflow-x: hidden;
+  top: 220px;
+}
+
+.el-scrollbar__thumb {
+  top: 46.625px;
+}
+
+.el-table th.gutter {
+  /* 解决el-table边框线对不齐问题 */
+  display: table-cell !important;
+  font-size: 14px;
+}
+
+.el-breadcrumb {
+  margin-bottom: 15px;
+}
+
+.el-input__suffix .el-input__suffix-inner .el-icon-circle-close:before {
+  content: '\e79d' !important;
+  font-size: 18px;
+}
