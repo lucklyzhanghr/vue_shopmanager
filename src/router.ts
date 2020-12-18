@@ -32,7 +32,17 @@ export default new Router({
         },
         {
           path: '/roles',
-          component: () => import('@/components/Roles.vue'),
+          component: () => import('@/components/rights/Roles.vue'),
+          meta: { title: '角色列表' }
+        },
+        {
+          path: '/rights',
+          component: () => import('@/components/rights/Rights.vue'),
+          meta: { title: '权限列表' }
+        },
+        {
+          path: '/roles',
+          component: () => import('@/components/rights/Roles.vue'),
           meta: { title: '角色列表' }
         }
       ]

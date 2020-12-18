@@ -30,7 +30,7 @@
         <!-- 登录按钮 -->
         <el-row class="buttons">
           <el-button type="primary" round @click="login">登陆</el-button>
-          <el-button type="info" round @click="resetting">重置</el-button>
+          <el-button type="info" round @click="resetting" class="reset">重置</el-button>
         </el-row>
       </el-form>
     </div>
@@ -143,9 +143,12 @@ export default {
     padding: 28px;
     box-sizing: border-box;
     .buttons {
-      width: 165px;
-      left: 50%;
+      width: 300px;
+      left: 55%;
       transform: translate(-50%);
+    }
+    .reset {
+      margin-left: 100px;
     }
   }
 }

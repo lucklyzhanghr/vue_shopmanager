@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- 顶部面包屑导航 -->
     <el-breadcrumb separator-class="el-icon-arrow-right" replace>
       <el-breadcrumb-item :to="{ path: '/login' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>用户管理</el-breadcrumb-item>
@@ -41,50 +42,53 @@
         :visible.sync="addUserDialogVisible"
         @close="closeAddUserDialog"
       >
-        <el-form
-          :model="addUserForm"
-          :rules="addUserRoles"
-          ref="addUserFormRef"
-          label-width="100px"
-        >
-          <el-form-item label="用户名" prop="username">
-            <el-col :span="16">
-              <el-input
-                v-model="addUserForm.username"
-                placeholder="请输入用户名"
-                clearable
-              ></el-input>
-            </el-col>
-          </el-form-item>
-          <el-form-item label="密码" prop="password">
-            <el-col :span="16">
-              <el-input
-                v-model="addUserForm.password"
-                placeholder="请输入密码"
-                :show-password="true"
-                clearable
-              ></el-input>
-            </el-col>
-          </el-form-item>
-          <el-form-item label="邮箱" prop="email">
-            <el-col :span="16">
-              <el-input
-                v-model="addUserForm.email"
-                placeholder="请输入邮箱"
-                clearable
-              ></el-input>
-            </el-col>
-          </el-form-item>
-          <el-form-item label="手机" prop="mobile">
-            <el-col :span="16">
-              <el-input
-                v-model="addUserForm.mobile"
-                placeholder="请输入手机号"
-                clearable
-              ></el-input>
-            </el-col>
-          </el-form-item>
-        </el-form>
+        <el-card class="box-card" shadow="always">
+          <el-form
+            :model="addUserForm"
+            :rules="addUserRoles"
+            ref="addUserFormRef"
+            label-width="100px"
+          >
+            <el-form-item label="用户名" prop="username">
+              <el-col :span="16">
+                <el-input
+                  v-model="addUserForm.username"
+                  placeholder="请输入用户名"
+                  clearable
+                ></el-input>
+              </el-col>
+            </el-form-item>
+            <el-form-item label="密码" prop="password">
+              <el-col :span="16">
+                <el-input
+                  v-model="addUserForm.password"
+                  placeholder="请输入密码"
+                  :show-password="true"
+                  clearable
+                ></el-input>
+              </el-col>
+            </el-form-item>
+            <el-form-item label="邮箱" prop="email">
+              <el-col :span="16">
+                <el-input
+                  v-model="addUserForm.email"
+                  placeholder="请输入邮箱"
+                  clearable
+                ></el-input>
+              </el-col>
+            </el-form-item>
+            <el-form-item label="手机" prop="mobile">
+              <el-col :span="16">
+                <el-input
+                  v-model="addUserForm.mobile"
+                  placeholder="请输入手机号"
+                  clearable
+                ></el-input>
+              </el-col>
+            </el-form-item>
+          </el-form>
+        </el-card>
+
         <div slot="footer" class="dialog-footer">
           <el-button @click="addUserDialogVisible = false">取 消</el-button>
           <el-button type="primary" @click="addUser">确 定</el-button>
@@ -141,6 +145,7 @@
                   class="el-icon-setting"
                   type="warning"
                   size="mini"
+                  @click="editUserRole(scope.row)"
                 ></el-button>
               </template>
             </el-table-column>
@@ -163,43 +168,86 @@
     <!-- 修改用户对话框区域 -->
     <el-dialog
       title="修改用户信息"
-      width="50%"
+      width="36%"
       :visible.sync="editUserDialogVisibal"
       @close="closeEditUserDialog"
     >
-      <el-form
-        :model="editUserForm"
-        :rules="addUserRoles"
-        ref="editUserFormRef"
-        label-width="100px"
-      >
-        <el-form-item label="用户名">
-          <el-col :span="13">
-            <el-input v-model="editUserForm.username" disabled></el-input>
-          </el-col>
-        </el-form-item>
-        <el-form-item label="邮箱" prop="email">
-          <el-col :span="13">
-            <el-input
-              v-model="editUserForm.email"
-              placeholder="请输入邮箱"
-              clearable
-            ></el-input>
-          </el-col>
-        </el-form-item>
-        <el-form-item label="手机" prop="mobile">
-          <el-col :span="13">
-            <el-input
-              v-model="editUserForm.mobile"
-              placeholder="请输入手机号"
-              clearable
-            ></el-input>
-          </el-col>
-        </el-form-item>
-      </el-form>
+      <el-card class="box-card" shadow="always" style="height=65%">
+        <el-form
+          :model="editUserForm"
+          :rules="addUserRoles"
+          ref="editUserFormRef"
+          label-width="100px"
+        >
+          <el-form-item label="用户名">
+            <el-col :span="18">
+              <el-input v-model="editUserForm.username" disabled></el-input>
+            </el-col>
+          </el-form-item>
+          <el-form-item label="邮箱" prop="email">
+            <el-col :span="18">
+              <el-input
+                v-model="editUserForm.email"
+                placeholder="请输入邮箱"
+                clearable
+              ></el-input>
+            </el-col>
+          </el-form-item>
+          <el-form-item label="手机" prop="mobile">
+            <el-col :span="18">
+              <el-input
+                v-model="editUserForm.mobile"
+                placeholder="请输入手机号"
+                clearable
+              ></el-input>
+            </el-col>
+          </el-form-item>
+        </el-form>
+      </el-card>
+
       <div slot="footer" class="dialog-footer">
         <el-button @click="editUserDialogVisibal = false">取 消</el-button>
         <el-button type="primary" @click="editUser">确 定</el-button>
+      </div>
+    </el-dialog>
+
+    <!-- 分配用户角色对话框 -->
+    <el-dialog
+      title="分配角色"
+      width="36%"
+      :visible.sync="assignRoleDialogVisibale"
+      @close="closeAssignRoleDialog"
+      destroy-on-close
+    >
+      <el-card class="box-card" shadow="always" style="height=65%">
+        <el-form
+          :label-position="labelPosition"
+          label-width="80px"
+          :model="currentEditUser"
+          class="form-assign-role"
+        >
+          <el-form-item label="当前用户">
+            <el-input v-model="currentEditUser.username" disabled></el-input>
+          </el-form-item>
+          <el-form-item label="当前角色">
+            <el-input v-model="currentEditUser.role_name" disabled></el-input>
+          </el-form-item>
+          <el-form-item label="新角色">
+            <el-select v-model="newRoleId" placeholder="请选择">
+              <el-option
+                v-for="item in allroles"
+                :key="item.id"
+                :label="item.roleName"
+                :value="item.id"
+              >
+              </el-option>
+            </el-select>
+          </el-form-item>
+        </el-form>
+      </el-card>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="assignRoleDialogVisibale = false">取 消</el-button>
+        <el-button type="primary" @click="saveUserNewRole">确 定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -273,7 +321,12 @@ export default {
         username: '',
         email: '',
         mobile: ''
-      }
+      },
+      assignRoleDialogVisibale: false,
+      labelPosition: 'right', // 分配角色表单文字对齐方式,
+      currentEditUser: {},
+      allroles: [],
+      newRoleId: ''
     }
   },
   methods: {
@@ -284,7 +337,7 @@ export default {
         })
         .catch(err => {
           this.$message.error(err.message)
-          return false
+          throw err
         })
       this.tableData = result.data.users
       this.total = result.data.total
@@ -378,6 +431,33 @@ export default {
         this.getData()
         this.editUserDialogVisibal = false
       })
+    },
+    // 获取当前系统所有角色
+    async getAllroles () {
+      let { data: result } = await this.$axios.get('/roles')
+      this.allroles = result.data
+    },
+    // 分配用户角色方法
+    editUserRole (user) {
+      this.getAllroles()
+      this.currentEditUser = user
+      this.assignRoleDialogVisibale = true
+    },
+    async saveUserNewRole () {
+      if (!this.newRoleId) return this.$message.error('请选择新角色')
+      let { data: result } = await this.$axios.put(
+        `users/${this.currentEditUser.id}/role`,
+        {
+          rid: this.newRoleId
+        }
+      )
+      this.$message.success(result.meta.msg)
+      this.getData()
+      this.assignRoleDialogVisibale = false
+    },
+    //  关闭分配角色对话框
+    closeAssignRoleDialog () {
+      this.newRoleId = ''
     }
   },
   created () {
@@ -399,5 +479,10 @@ export default {
   display: flex;
   justify-content: center;
 }
-
+.el-card__body {
+  padding: 35px;
+}
+.el-dialog .el-form-item {
+  padding: 6px;
+}
 </style>

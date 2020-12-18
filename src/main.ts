@@ -47,7 +47,11 @@ axios.interceptors.request.use(
 // 对响应数据进行拦截
 axios.interceptors.response.use(
   response => {
-    if (!response.data.meta.msg.includes('成功')) {
+    if (response.data.meta.msg.includes('无效token')) {
+      Vue.prototype.$message.error(response.data.meta.msg)
+      router.push('/login')
+      return Promise.reject(response.data.meta.msg)
+    } else if (!response.data.meta.msg.includes('成功')) {
       Vue.prototype.$message.error(response.data.meta.msg)
       return Promise.reject(response.data.meta.msg)
     } else {

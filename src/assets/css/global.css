@@ -25,8 +25,12 @@ body,
 .el-breadcrumb {
   margin-bottom: 15px;
 }
-
+ /* 优化输入框清空图标样式 */
 .el-input__suffix .el-input__suffix-inner .el-icon-circle-close:before {
   content: '\e79d' !important;
   font-size: 18px;
+}
+
+.el-table__row td, .el-table th {
+  text-align: center;
 }
