@@ -9,7 +9,7 @@ import './assets/fonts/iconfont.css'
 import axios from 'axios'
 
 // 设置默认请求后台根路径
-axios.defaults.baseURL = 'http://localhost:8888/api/private/v1'
+axios.defaults.baseURL = glob.baseURL
 
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios

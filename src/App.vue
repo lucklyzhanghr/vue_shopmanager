@@ -5,9 +5,12 @@
 </template>
 
 <script>
-export default {
-  name: 'app'
-}
+  export default {
+    name: 'app',
+    data: {
+      item: "123"
+    }
+  }
 </script>
 
 <style lang="less" scoped></style>
